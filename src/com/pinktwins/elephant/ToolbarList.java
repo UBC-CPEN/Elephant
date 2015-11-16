@@ -1,6 +1,5 @@
 package com.pinktwins.elephant;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -115,14 +114,14 @@ public abstract class ToolbarList<T extends Component & ToolbarList.ToolbarListI
 		search.setFixedColor(Color.decode("#e9e9e9"));
 		search.useV2();
 		search.windowFocusGained();
-		
+
 		trash = new JButton("");
 		trash.setBorderPainted(false);
 		trash.setContentAreaFilled(false);
 		trash.setIcon(new ImageIcon(noteToolsTrash));
-		trash.setVisible(this instanceof Notebooks );
-		trash.setBounds(newButtonImage.getWidth(null) + 175, 10, noteToolsTrash.getWidth(null), noteToolsTrash.getHeight(null));
-		
+		trash.setVisible(this instanceof Notebooks);
+		trash.setBounds(newButtonImage.getWidth(null) + 177, 10, noteToolsTrash.getWidth(null), noteToolsTrash.getHeight(null));
+
 		tools.add(bNew);
 		tools.add(search);
 		tools.add(trash);
@@ -142,7 +141,7 @@ public abstract class ToolbarList<T extends Component & ToolbarList.ToolbarListI
 	protected abstract List<T> queryFilter(String text);
 
 	protected abstract void newButtonAction();
-	
+
 	protected abstract void trashButtonAction();
 
 	protected void vkEnter() {
@@ -284,8 +283,8 @@ public abstract class ToolbarList<T extends Component & ToolbarList.ToolbarListI
 			public void keyReleased(KeyEvent e) {
 			}
 		});
-		
-		if(this instanceof Notebooks) {
+
+		if (this instanceof Notebooks) {
 			trash.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
