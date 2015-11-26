@@ -155,7 +155,7 @@ abstract class NoteItem extends JPanel implements Comparable<NoteItem>, MouseLis
 		// time
 		String ts = "";
 		Color col = ElephantWindow.colorGreen;
-		
+
 		long now = System.currentTimeMillis();
 		Date noteDate = new Date(note.lastModified());
 
@@ -179,28 +179,25 @@ abstract class NoteItem extends JPanel implements Comparable<NoteItem>, MouseLis
 		StyleConstants.setForeground(style, col);
 		
 		if (note.isMarkdown()) {
-			Element[] roots = null; 
-			Element myElement = null;
+			Element rootElem = null;
+			Element bodyElem = null;
 			
-			HTMLDocument myDocument = (HTMLDocument)preview.getDocument();
-			roots=preview.getDocument().getRootElements();
+			HTMLDocument htmlDoc = (HTMLDocument) preview.getDocument();
+			rootElem = preview.getDocument().getRootElements()[0];
 				
-			for (int i=0; i < roots[0].getElementCount(); i++) {
-				Element element=roots[0].getElement(i);
-				if (element.getAttributes().getAttribute(StyleConstants.NameAttribute) == HTML.Tag.BODY) {
-					myElement=element;
+			for (int i = 0; i < rootElem.getElementCount(); i++) {
+				bodyElem = rootElem.getElement(i);
+				if (bodyElem.getAttributes().getAttribute(StyleConstants.NameAttribute) == HTML.Tag.BODY) {
+					try {
+						htmlDoc.insertAfterStart(bodyElem,"<p style='margin:0;padding:0;color:" + String.format("#%02x%02x%02x", col.getRed(), col.getGreen(), col.getBlue()) +"'>" + ts + "</p>");
+					} catch (BadLocationException e) {
+						LOG.severe("Fail: " + e);
+					} catch (IOException e) {
+						LOG.severe("Fail: " + e);
+					}
 					break;
 				}
-			}
-			
-			try {
-				myDocument.insertAfterStart(myElement,"<p style='margin:0;padding:0;color:" + String.format("#%02x%02x%02x", col.getRed(), col.getGreen(), col.getBlue()) +"'>" + ts + "</p>");
-			} catch (BadLocationException e) {
-				LOG.severe("Fail: " + e);
-			} catch (IOException e) {
-				LOG.severe("Fail: " + e);
-			}
-			  
+			} 
 		} else {
 			try {
 				preview.getDocument().insertString(0, ts + " ", style);
@@ -208,7 +205,7 @@ abstract class NoteItem extends JPanel implements Comparable<NoteItem>, MouseLis
 				LOG.severe("Fail: " + e);
 			}
 		}
-		
+
 		previewPane.add(preview);
 
 		// Picture thumbnail.
