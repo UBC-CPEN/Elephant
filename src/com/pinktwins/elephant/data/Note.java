@@ -6,7 +6,6 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -17,6 +16,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
 
@@ -210,6 +210,13 @@ public class Note implements Comparable<Note> {
 		// Check if millis is 0, if so, last accessed time is not supported 
 		long millis = basicFileAttributes.lastAccessTime().toMillis();
 	    return millis > 0 ? df.print(basicFileAttributes.lastAccessTime().toMillis()) : "";
+	}
+	
+	public int updateWordCount(){
+		List<String> words = new ArrayList<String>();
+		Matcher matcher = Pattern.compile("\\S+").matcher(contents());
+		while(matcher.find()) words.add(matcher.group());
+		return words.size();
 	}
 
 	private void readInfo() {

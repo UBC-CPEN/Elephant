@@ -629,7 +629,7 @@ public class NoteEditor extends BackgroundPanel implements EditorEventListener {
 		String createdStr = currentNote.createdStr();
 		String updatedStr = currentNote.updatedStr();
 		String accessedStr = currentNote.accessedStr();
-
+	
 		noteCreated.setText("Created: " + createdStr);
 		noteUpdated.setText("Updated: " + updatedStr);
 		
@@ -639,6 +639,10 @@ public class NoteEditor extends BackgroundPanel implements EditorEventListener {
 			noteAccessed.setText("");
 			noteAccessed.setVisible(false);
 		}
+	}
+
+	public int reloadWordCount(){
+		return currentNote.updateWordCount();
 	}
 	
 	public void focusQuickLook() {
