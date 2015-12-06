@@ -13,5 +13,8 @@ files: NoteItem.java
 Implementation 4: Add word count feature
 files: ElephantWindow.java, NoteEditor.java, Note.java
 
-Implementation 5: Hide recent notes in sidebar
+Implementation 5: Add last accessed date 
+files: NoteEditor.java, Note.java
+
+Implementation 6: Hide recent notes in sidebar
 files: ElephantWindow.java, Sidebar.java, Settings.java
