@@ -1,8 +1,23 @@
 Elephant
 ========
 
-[![Join the chat at https://gitter.im/jusu/Elephant](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jusu/Elephant?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+We want to fix the creation date missing in markdown notes bug.
+We want to improve overall useability of the program.
 
-Notetaker with a classic interface.
+Implementation 1: Notebook delete button
+files: ToolbarList.java, Notebooks.java, NotebooksModal.java, TagList.java, ToolbarList.java
 
-go to http://elephant.mine.nu
+Implementation 2: Search by date feature
+files: LuceneSearchIndex.java, MemorySearchIndex.java, SearchIndexInterface.java, SearchIndexer.java
+
+Implementation 3: Creation date missing from markdown notes bug
+files: NoteItem.java
+
+Implementation 4: Add word count feature
+files: ElephantWindow.java, NoteEditor.java, Note.java
+
+Implementation 5: Add last accessed date 
+files: NoteEditor.java, Note.java
+
+Implementation 6: Hide recent notes in sidebar
+files: ElephantWindow.java, Sidebar.java, Settings.java
